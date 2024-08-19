@@ -1,0 +1,22 @@
+<div #chatContent class="chat-content">
+  <ul *ngIf="hasContent; else noContentTemplate">
+    <ng-container *ngFor="let item of chatList$ | async; let i = index">
+      <chat-list-item [data]="item"></chat-list-item>
+    </ng-container>
+  </ul>
+
+  <ng-template #noContentTemplate>
+    <div class="no-content-hint" [ngClass]="{ fullscreen: isFullscreen }">
+      {{ 'Hi!' }} <br />
+      {{ 'How can I help you?' }}
+    </div>
+  </ng-template>
+</div>
+
+<div class="chat-input">
+  <input spellcheck="true" [(ngModel)]="input" [placeholder]="'Enter here ...'" (keyup.enter)="send()" />
+
+  <button class="send-btn" (click)="send()">
+    <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+  </button>
+</div>

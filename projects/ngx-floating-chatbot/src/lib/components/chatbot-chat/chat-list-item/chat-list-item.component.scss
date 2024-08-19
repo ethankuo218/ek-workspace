@@ -1,0 +1,210 @@
+li.chat-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 20px;
+
+  &.from-bot {
+    justify-content: flex-start;
+
+    .action-box {
+      display: flex;
+    }
+
+    .chatbot-btn {
+      width: 32px;
+      height: 22px;
+
+      border: none;
+      border-radius: 4px;
+      background-color: transparent;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 3px 8px;
+      margin-top: 10px;
+
+      fa-icon {
+        height: 16px;
+        width: 16px;
+
+        color: #474a54;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .chatbot-btn:hover,
+    .chatbot-btn.focus {
+      background-color: #e1e3e5;
+    }
+  }
+
+  &.from-user {
+    justify-content: flex-end;
+  }
+}
+
+li.chat-row.from-bot .chat-bubble {
+  max-width: 85%;
+  background-color: #f1f2f3;
+  padding: 8px 16px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+$green: #e7e7e7;
+$turquoise: rgba(153, 153, 153, 0.4);
+$blue: #e7e7e7;
+$light-blue: rgba(153, 153, 153, 0.4);
+$purple: #e1e3e5;
+
+li.chat-row.from-bot .chat-bubble .loading-bar {
+  height: 16px;
+  width: 312px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-image: linear-gradient(
+    to right,
+    $green,
+    $turquoise,
+    $blue,
+    $light-blue,
+    $purple
+  );
+
+  animation: placeHolderShimmer 5s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  transition-property: width, background-color;
+}
+
+li.chat-row.from-bot .chat-bubble .loading-bar.second-line {
+  width: 156px;
+  margin-bottom: 0;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -312px 0;
+  }
+  100% {
+    background-position: 312px 0;
+  }
+}
+
+li.chat-row.from-bot:first-child .chat-bubble,
+li.chat-row:not(.from-bot) + li.chat-row.from-bot .chat-bubble {
+  border-top-left-radius: 24px;
+}
+
+li.chat-row.from-bot:has(+ li.chat-row.from-user) .chat-bubble,
+li.chat-row.from-bot:last-child .chat-bubble {
+  border-bottom-left-radius: 24px;
+}
+
+li.chat-row.from-user .chat-bubble {
+  max-width: 85%;
+  background-color: #4d9ac7;
+  padding: 8px 16px;
+  color: white;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+li.chat-row.from-user:first-child .chat-bubble,
+li.chat-row:not(.from-user) + li.chat-row.from-user .chat-bubble {
+  border-top-right-radius: 24px;
+}
+
+li.chat-row.from-user:has(+ li.chat-row.from-bot) .chat-bubble,
+li.chat-row.from-user:last-child .chat-bubble {
+  border-bottom-right-radius: 24px;
+}
+
+.comment-input {
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #cccfd3;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  textarea {
+    border: none;
+    width: 100%;
+    min-height: 36px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    resize: none;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    caret-color: #474a54;
+  }
+
+  textarea:focus {
+    outline: none;
+  }
+}
+
+.comment-input .title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #474a54;
+
+  button.close-btn {
+    height: 16px;
+    width: 16px;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+
+    fa-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #474a54;
+    }
+  }
+}
+
+.comment-input .bottom-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .submit-btn {
+    background-color: #e1e3e5;
+    padding: 3px 6px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #006faf;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: #cccfd3;
+  }
+}

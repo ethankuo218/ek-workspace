@@ -1,0 +1,31 @@
+.chatbot-toggler {
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1;
+  outline: none;
+  border: none;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #006faf;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #005e95;
+  }
+
+  .message-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    fa-icon {
+      color: white;
+    }
+  }
+}
