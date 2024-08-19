@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -15,6 +15,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './history-list-item.component.scss'
 })
 export class HistoryListItemComponent {
+  @ViewChild('historyToolBtn') historyToolBtn!: ElementRef;
+
   // Context menu related
   public currentSelectedToolMenuIndex: number | null = null;
   public currentEditChatNameIndex: number | null = null;
@@ -22,6 +24,7 @@ export class HistoryListItemComponent {
 
   public openToolMenu(index: number): void {
     this.currentSelectedToolMenuIndex = index;
+    this.historyToolBtn.nativeElement.focus();
   }
 
   public closeToolMenu(): void {
