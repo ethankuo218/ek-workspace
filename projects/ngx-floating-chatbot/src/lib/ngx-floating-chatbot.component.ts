@@ -5,31 +5,32 @@ import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import { ChatbotWindowComponent } from './chatbot-window/chatbot-window.component';
-import { NgxFloatingChatbotService } from './service/ngx-floating-chatbot.service';
+import { NGX_FLOATING_CHATBOT_CONFIG, NgxFloatingChatbotService } from './service/ngx-floating-chatbot.service';
+import { ChatbotHistoryComponent } from './components/chatbot-history/chatbot-history.component';
+import { ChatbotChatComponent } from './components/chatbot-chat/chatbot-chat.component';
+import { OllamaConfig } from '../models/chatbot.model';
 
 @Component({
   selector: 'ngx-floating-chatbot',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, ChatbotWindowComponent],
-  template: `
-  <button class="chatbot-toggler" (click)="toggleChatWindow()">
-  <span class="message-icon" [ngSwitch]="showChatWindow">
-      <ng-container *ngSwitchCase="true">
-        <fa-icon [icon]="['fas', 'angle-down']" transform="grow-6"></fa-icon>
-      </ng-container>
-      <ng-container *ngSwitchCase="false">
-      <fa-icon [icon]="['fas', 'comment']" transform="grow-6"></fa-icon>
-      </ng-container>
-    </span>
-</button>
-
-<chatbot-window *ngIf="true"></chatbot-window>
-  `,
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    ChatbotHistoryComponent,
+    ChatbotChatComponent
+  ],
+  templateUrl: './ngx-floating-chatbot.component.html',
   styleUrls: ['./ngx-floating-chatbot.component.scss'],
-  providers: [NgxFloatingChatbotService]
+  providers: [NgxFloatingChatbotService, {
+    provide: NGX_FLOATING_CHATBOT_CONFIG,
+    useValue: {
+      apiUrl: '/mock-sse',
+      model: 'llama3',
+    } as OllamaConfig
+  }]
 })
 export class NgxFloatingChatbotComponent {
+  @Input() config?: Partial<OllamaConfig>;
   @Input() openIcon: IconProp = faAngleUp;
   @Input() closeIcon: IconProp = faAngleDown;
 
@@ -37,12 +38,18 @@ export class NgxFloatingChatbotComponent {
   private destroyed$ = new Subject<void>();
 
   public showChatWindow: boolean = false;
+  public isFullscreen: boolean = false;
 
   public get currentIcon(): IconProp {
     return this.showChatWindow ? this.closeIcon : this.openIcon;
   }
 
   constructor() {
+    if (this.config) {
+      const currentConfig = inject(NGX_FLOATING_CHATBOT_CONFIG);
+      Object.assign(currentConfig, this.config);
+    }
+
     this.library.addIconPacks(fas, far);
   }
 
@@ -53,5 +60,9 @@ export class NgxFloatingChatbotComponent {
 
   public toggleChatWindow() {
     this.showChatWindow = !this.showChatWindow;
+  }
+
+  public toggleFullscreen() {
+    this.isFullscreen = !this.isFullscreen;
   }
 }

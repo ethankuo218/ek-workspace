@@ -12,11 +12,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #006faf;
+  background: #6f93ff;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #005e95;
+    background-color: #91aaf5;
   }
 
   .message-icon {
@@ -27,5 +27,61 @@
     fa-icon {
       color: white;
     }
+  }
+}
+
+.chatbot-window {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  z-index: 100;
+  right: 1vw;
+  bottom: 80px;
+  height: 480px;
+  width: 440px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px 0px rgba(9, 30, 66, 0.25),
+    0px 0px 1px 0px rgba(9, 30, 66, 0.31);
+
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.chatbot-window.full-screen {
+  height: 85vh;
+  width: 98vw;
+}
+
+.chatbot-window > header {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #32353f;
+  padding: 12px 16px 12px 16px;
+}
+
+.chatbot-window > body {
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.fullscreen-btn {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  fa-icon {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

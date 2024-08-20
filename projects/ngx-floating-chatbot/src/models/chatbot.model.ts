@@ -5,3 +5,8 @@ export interface ChatMessage {
   answer: ReplaySubject<string>;
   done: ReplaySubject<boolean>;
 }
+
+export interface OllamaConfig {
+  apiUrl: string;
+  model?: string;
+}

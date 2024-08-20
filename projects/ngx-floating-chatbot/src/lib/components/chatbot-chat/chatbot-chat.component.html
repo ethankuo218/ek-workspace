@@ -1,16 +1,14 @@
 <div #chatContent class="chat-content">
-  <ul *ngIf="hasContent; else noContentTemplate">
-    <ng-container *ngFor="let item of chatList$ | async; let i = index">
-      <chat-list-item [data]="item"></chat-list-item>
-    </ng-container>
-  </ul>
-
-  <ng-template #noContentTemplate>
+  <ul>
+    @for (item of chatList$ | async; track $index) {
+    <chat-list-item [data]="item"></chat-list-item>
+    } @empty {
     <div class="no-content-hint" [ngClass]="{ fullscreen: isFullscreen }">
       {{ 'Hi!' }} <br />
       {{ 'How can I help you?' }}
     </div>
-  </ng-template>
+    }
+  </ul>
 </div>
 
 <div class="chat-input">

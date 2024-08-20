@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HistoryListItemComponent } from './history-list-item/history-list-item.component';
@@ -7,10 +7,9 @@ import { HistoryListItemComponent } from './history-list-item/history-list-item.
   selector: 'chatbot-history',
   standalone: true,
   imports: [
-    CommonModule,
     FontAwesomeModule,
     HistoryListItemComponent
-  ],
+],
   templateUrl: './chatbot-history.component.html',
   styleUrl: './chatbot-history.component.scss'
 })

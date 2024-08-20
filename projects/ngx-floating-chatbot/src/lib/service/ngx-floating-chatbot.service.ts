@@ -1,11 +1,16 @@
+import { OllamaConfig } from './../../models/chatbot.model';
 import { ElementRef, inject, Injectable } from '@angular/core';
 import { SseClient } from 'ngx-sse-client';
 import { BehaviorSubject, filter, ReplaySubject } from 'rxjs';
 import { ChatMessage } from '../../models/chatbot.model';
+import { InjectionToken } from '@angular/core';
+
+export const NGX_FLOATING_CHATBOT_CONFIG = new InjectionToken<OllamaConfig>('NGX_FLOATING_CHATBOT_CONFIG');
 
 @Injectable()
 export class NgxFloatingChatbotService {
   private sseClient = inject(SseClient);
+  private config = inject(NGX_FLOATING_CHATBOT_CONFIG);
 
   private chatIndex: number = 0;
   private chatContent!: ElementRef;
@@ -33,14 +38,14 @@ export class NgxFloatingChatbotService {
 
     this.sseClient
       .stream(
-        '/mock-see',
+        this.config.apiUrl,
         {
           keepAlive: false,
           responseType: 'event'
         },
         {
           body: {
-            model: 'llama3',
+            model: this.config.model,
             prompt: input
           }
         },

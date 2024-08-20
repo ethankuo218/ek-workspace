@@ -28,17 +28,13 @@ export class ChatbotChatComponent {
 
   public chatList$ = this.service.chatList$;
   public input: string = '';
-  public hasContent: boolean = false;
 
   public send(): void {
     if (this.input === '') {
       return;
-    } else {
-      this.hasContent = true;
     }
 
     this.service.generateResponse(this.input, this.chatContent);
-
     this.input = '';
   }
 }

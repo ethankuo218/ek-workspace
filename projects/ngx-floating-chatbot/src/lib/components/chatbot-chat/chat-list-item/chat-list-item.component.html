@@ -3,17 +3,17 @@
 </li>
 <li class="chat-row from-bot">
   <div class="chat-bubble">
-    <ng-container *ngIf="data.answer | async as answer; else loading">
-      <div class="chat-bubble-content">
-        {{ answer }}
-      </div>
-    </ng-container>
-    <ng-template #loading>
-      <div class="loading-bar"></div>
-      <div class="loading-bar second-line"></div>
-    </ng-template>
+    @if (data.answer | async; as answer) {
+    <div class="chat-bubble-content">
+      {{ answer }}
+    </div>
+    } @else {
+    <div class="loading-bar"></div>
+    <div class="loading-bar second-line"></div>
+    }
 
-    <div *ngIf="data.done | async" class="action-box">
+    @if (data.done | async) {
+    <div class="action-box">
       <button class="chatbot-btn" [ngClass]="{ focus: showCommentArea }" (click)="toggleCommentArea()">
         <fa-icon [icon]="['fas', 'thumbs-down']" transform="shrink-4"></fa-icon>
       </button>
@@ -21,11 +21,12 @@
         <fa-icon [icon]="['fas', 'arrows-rotate']" transform="shrink-4"></fa-icon>
       </button>
     </div>
+    }
 
-    <div *ngIf="showCommentArea" class="comment-input">
+    @if (showCommentArea) {
+    <div class="comment-input">
       <div class="title-box">
         {{ 'Tell us more：' }}
-
         <button class="close-btn" (click)="toggleCommentArea()">
           <fa-icon [icon]="['fas', 'xmark']" transform="grow-3"></fa-icon>
         </button>
@@ -38,5 +39,6 @@
         </button>
       </div>
     </div>
+    }
   </div>
 </li>

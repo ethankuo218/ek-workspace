@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -7,10 +7,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   selector: 'history-list-item',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
-    FontAwesomeModule,
-  ],
+    FontAwesomeModule
+],
   templateUrl: './history-list-item.component.html',
   styleUrl: './history-list-item.component.scss'
 })
